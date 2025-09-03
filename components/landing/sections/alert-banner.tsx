@@ -16,7 +16,7 @@ export function AlertBanner() {
           DMX-docs as a standalone package is still work in progress. If you
           want to help out, please check out the{" "}
           <a
-            href="https://github.com/vantezzen/auto-form"
+            href="https://github.com/DataMatrix-RGIT/auto-docs"
             className="text-blue-600 hover:text-blue-800 decoration-blue-600  underline font-medium transition-colors"
             target="_blank"
             rel="noopener noreferrer"

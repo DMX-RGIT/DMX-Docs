@@ -7,11 +7,11 @@ description: Automatically render forms for your existing data schema.
 
 ## When to use DMX-docs?
 
-DMX-docs is mostly meant as a drop-in form builder for your internal and low-priority forms with existing schemas. For example, if you already have schemas for your API and want to create a simple admin panel to edit user profiles, simply pass the schema to DMX-docs and you're done.
+DMX-docs is mostly meant as a drop-in docs builder for your internal and low-priority forms with existing schemas. For example, if you already have schemas for your API and want to create a simple admin panel to edit user profiles, simply pass the schema to DMX-docs and you're done.
 
-As forms almost always grow more complex, DMX-docs gives you options to customize how forms are rendered (e.g. using the `fieldConfig` options) and gives you escape hatches to customize the form even further.
+As forms almost always grow more complex, DMX-docs gives you options to customize how forms are rendered (e.g. using the `fieldConfig` options) and gives you escape hatches to customize the docs even further.
 
-However, DMX-docs does not aim to be a full-featured form builder. It does not aim to support every edge case in your schema or allow building complex, multi-page forms. If you need more customization, feel free to customize DMX-docs's renderer in your project or use more powerful form builders like [Formik](https://formik.org/) - though those require more specialized configuration instead of simple drop-in support for your zod schema. For an example on how DMX-docs can be extended for more powerful, YAML-based, multi-page forms, see [DMX-docs YAML](https://github.com/roeyazroel/auto-form).
+However, DMX-docs does not aim to be a full-featured docs builder. It does not aim to support every edge case in your schema or allow building complex, multi-page forms. If you need more customization, feel free to customize DMX-docs's renderer in your project or use more powerful docs builders like [Formik](https://formik.org/) - though those require more specialized configuration instead of simple drop-in support for your zod schema. For an example on how DMX-docs can be extended for more powerful, YAML-based, multi-page forms, see [DMX-docs YAML](https://github.com/roeyazroel/auto-docs).
 
 ## Installation
 
@@ -19,6 +19,6 @@ However, DMX-docs does not aim to be a full-featured form builder. It does not a
 
 ## shadcn/ui component
 
-DMX-docs started out as a [shadcn/ui component](https://github.com/vantezzen/auto-form) but grew so large I decided it's best to split it into a package instead.
+DMX-docs started out as a [shadcn/ui component](https://github.com/DataMatrix-RGIT/auto-docs) but grew so large I decided it's best to split it into a package instead.
 
 `@DMX-docs/react` does currently not have full feature-parity with the shadcn/ui component, but it's getting there. If you want to use the shadcn/ui component, you can still use it as a standalone package.

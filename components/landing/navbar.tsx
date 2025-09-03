@@ -63,7 +63,7 @@ export const Navbar = () => {
         <Button asChild size="sm" variant="ghost" aria-label="View on GitHub">
           <Link
             aria-label="View on GitHub"
-            href="https://github.com/vantezzen/DMX-docs.git"
+            href="https://github.com/DataMatrix-RGIT/DMX-docs.git"
             target="_blank"
           >
             <GithubIcon className="size-6" />

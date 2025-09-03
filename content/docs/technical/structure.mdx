@@ -1,6 +1,6 @@
 ---
 title: Library Structure
-description: DMX-docs is a modular form generation library designed to be flexible and adaptable to different schema and UI libraries. The library is structured in layers, each providing specific functionality
+description: DMX-docs is a modular docs generation library designed to be flexible and adaptable to different schema and UI libraries. The library is structured in layers, each providing specific functionality
 ---
 
 ## 1. @DMX-docs/core
@@ -11,7 +11,7 @@ Key features:
 
 - Defines core types and interfaces
 - Provides utility functions for parsing schemas and validating data
-- Implements a dependency manager for form fields
+- Implements a dependency manager for docs fields
 
 ## 2. Schema Providers (e.g., @DMX-docs/zod)
 
@@ -66,16 +66,16 @@ This package provides React-specific implementations and hooks for using DMX-doc
 Key features:
 
 - Implements the `DMX-docs` component
-- Provides React context for form state management
+- Provides React context for docs state management
 - Defines types for React-specific props and components
 
 ## 4. UI-specific libraries (e.g., @DMX-docs/mui)
 
-These packages implement UI components for specific design systems or component libraries. They use the core functionality from @DMX-docs/react and provide styled form elements.
+These packages implement UI components for specific design systems or component libraries. They use the core functionality from @DMX-docs/react and provide styled docs elements.
 
 Key features:
 
-- Implement UI-specific form components (inputs, selects, etc.)
+- Implement UI-specific docs components (inputs, selects, etc.)
 - Provide a themed `DMX-docs` component
 - Define additional utility functions for the specific UI library
 
@@ -91,7 +91,7 @@ import {
 } from "@DMX-docs/react";
 import { ThemeProvider } from "@mui/material/styles";
 import { DMX-docsProps } from "./types";
-import { Form } from "./components/Form";
+import { docs } from "./components/docs";
 import { FieldWrapper } from "./components/FieldWrapper";
 import { ErrorMessage } from "./components/ErrorMessage";
 import { SubmitButton } from "./components/SubmitButton";
@@ -103,7 +103,7 @@ import { SelectField } from "./components/SelectField";
 import { ArrayField } from "./components/ArrayField";
 
 const MuiUIComponents: DMX-docsUIComponents = {
-  Form,
+  docs,
   FieldWrapper,
   ErrorMessage,
   SubmitButton,
@@ -142,12 +142,12 @@ export function DMX-docs<T extends Record<string, any>>({
 
 ## How They Interact
 
-1. A user defines their form schema using a supported schema library (e.g., Zod).
+1. A user defines their docs schema using a supported schema library (e.g., Zod).
 2. The schema is passed to the appropriate schema provider (e.g., @DMX-docs/zod).
 3. The `DMX-docs` component from a UI-specific library (e.g., @DMX-docs/mui) is used in the React application.
 4. This `DMX-docs` component wraps the core `DMX-docs` from @DMX-docs/react, providing UI-specific components.
-5. The core `DMX-docs` uses the schema provider to parse the schema, generate form fields, and handle validation.
-6. UI-specific components render the form fields and handle user input.
-7. On form submission, the schema provider validates the data, and the result is passed to the onSubmit handler.
+5. The core `DMX-docs` uses the schema provider to parse the schema, generate docs fields, and handle validation.
+6. UI-specific components render the docs fields and handle user input.
+7. On docs submission, the schema provider validates the data, and the result is passed to the onSubmit handler.
 
 This modular structure allows DMX-docs to be flexible and extensible. Users can choose their preferred schema library and UI framework, or even create custom implementations for unsupported libraries.

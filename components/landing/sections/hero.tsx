@@ -7,18 +7,6 @@ import { useTheme } from "next-themes";
 import Link from "next/link";
 
 export const HeroSection = () => {
-  const [isMounted, setIsMounted] = useState(false);
-  const { setTheme } = useTheme();
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) {
-    return null;
-  }
-
-  setTheme("light");
   return (
     <section className="container w-full">
       <div className="grid place-items-center lg:max-w-screen-xl gap-8 mx-auto py-20 md:py-32">
@@ -45,9 +33,9 @@ export const HeroSection = () => {
 
           <div className="space-y-4 md:space-y-0 md:space-x-4">
             <Link href="/docs">
-              <Button className="w-5/6 md:w-1/4 font-bold group/arrow">
+              <Button className="w-5/6 md:w-1/3 font-bold group/arrow">
                 Get Started
-                <ArrowRight className="size-6 ml-2 group-hover/arrow:translate-x-1 transition-transform" />
+                <ArrowRight className="size-4 ml-3  group-hover/arrow:translate-x-1 transition-transform" />
               </Button>
             </Link>
 
