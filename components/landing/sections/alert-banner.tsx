@@ -13,7 +13,7 @@ export function AlertBanner() {
           <span className="font-bold text-amber-900 text-base">
             Work in Progress{" "}
           </span>
-          DMX-docs as a standalone package is still work in progress. If you
+          DMX-docs as a standalone docs is still work in progress. If you
           want to help out, please check out the{" "}
           <a
             href="https://github.com/DataMatrix-RGIT/auto-docs"

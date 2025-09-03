@@ -3,151 +3,294 @@ title: Library Structure
 description: DMX-docs is a modular docs generation library designed to be flexible and adaptable to different schema and UI libraries. The library is structured in layers, each providing specific functionality
 ---
 
-## 1. @DMX-docs/core
+import { File, Folder, Files } from "fumadocs-ui/components/files";
 
-This is the foundation of the DMX-docs library. It's agnostic to both schema and UI libraries, providing core functionality and types used by other layers.
+# Fumadocs Framework: Quick Start
 
-Key features:
+URL: /docs/ui
+Source: https://raw.githubusercontent.com/fuma-nama/fumadocs/refs/heads/main/apps/docs/content/docs/ui/index.mdx
 
-- Defines core types and interfaces
-- Provides utility functions for parsing schemas and validating data
-- Implements a dependency manager for docs fields
+Getting Started with Fumadocs
 
-## 2. Schema Providers (e.g., @DMX-docs/zod)
+---
 
-These packages adapt specific schema libraries to work with DMX-docs. They implement the `SchemaProvider` interface defined in @DMX-docs/core.
+title: Quick Start
+description: Getting Started with Fumadocs
+icon: Album
 
-Key features:
+---
 
-- Parse schema definitions into a format DMX-docs can understand
-- Provide validation logic specific to the schema library
-- Handle default values and field configurations
+## Introduction
 
-Example with @DMX-docs/zod:
+Fumadocs <span className="text-fd-muted-foreground text-sm">(Foo-ma docs)</span> is a **documentation framework**, designed to be fast, flexible,
+and composes seamlessly into your React framework.
 
-```tsx
-// packages/zod/src/provider.ts
-import { z } from "zod";
-import { SchemaProvider, ParsedSchema } from "@DMX-docs/core";
-import { getDefaultValues } from "./default-values";
-import { parseSchema } from "./schema-parser";
+Fumadocs has different parts:
 
-export class ZodProvider<T extends z.ZodObject<any, any>>
-  implements SchemaProvider<z.infer<T>>
-{
-  constructor(private schema: T) {}
+import { CpuIcon, Database, PanelsTopLeft, Terminal } from "lucide-react";
 
-  parseSchema(): ParsedSchema {
-    return parseSchema(this.schema);
-  }
+<Cards>
+  <Card icon={<CpuIcon className="text-purple-300" />} title="Fumadocs Core">
+    Handles most of the logic, including document search, content source adapters, and Markdown extensions.
+  </Card>
 
-  validateSchema(values: z.infer<T>) {
-    try {
-      this.schema.parse(values);
-      return { success: true, data: values } as const;
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        return { success: false, errors: error.errors } as const;
-      }
-      throw error;
-    }
-  }
+{" "}
 
-  getDefaultValues(): Record<string, any> {
-    return getDefaultValues(this.schema);
-  }
-}
+<Card icon={<PanelsTopLeft className="text-blue-300" />} title="Fumadocs UI">
+  The default theme of Fumadocs offers a beautiful look for documentation sites
+  and interactive components.
+</Card>
+
+{" "}
+
+<Card icon={<Database />} title="Content Source">
+  The source of your content, can be a CMS or local data layers like [Fumadocs
+  MDX](/docs/mdx) (the official content source).
+</Card>
+
+  <Card icon={<Terminal />} title="Fumadocs CLI">
+    A command line tool to install UI components and automate things, useful for customizing layouts.
+  </Card>
+</Cards>
+
+<Callout title="Want to learn more?">
+  Read our in-depth [What is Fumadocs](/docs/ui/what-is-fumadocs) introduction.
+</Callout>
+
+### Terminology
+
+**Markdown/MDX:** Markdown is a markup language for creating formatted text. Fumadocs natively supports Markdown and MDX (superset of Markdown).
+
+**[Bun](https://bun.sh):** A JavaScript runtime, we use it for running scripts.
+
+Some basic knowledge of React.js would be useful for further customisations.
+
+## Automatic Installation
+
+A minimum version of Node.js 20 required.
+
+```bash tab="npm"
+npm create fumadocs-app
 ```
 
-## 3. @DMX-docs/react
-
-This package provides React-specific implementations and hooks for using DMX-docs in React applications.
-
-Key features:
-
-- Implements the `DMX-docs` component
-- Provides React context for docs state management
-- Defines types for React-specific props and components
-
-## 4. UI-specific libraries (e.g., @DMX-docs/mui)
-
-These packages implement UI components for specific design systems or component libraries. They use the core functionality from @DMX-docs/react and provide styled docs elements.
-
-Key features:
-
-- Implement UI-specific docs components (inputs, selects, etc.)
-- Provide a themed `DMX-docs` component
-- Define additional utility functions for the specific UI library
-
-Example with @DMX-docs/mui:
-
-```tsx
-// packages/mui/src/DMX-docs.tsx
-import React from "react";
-import {
-  DMX-docs as BaseDMX-docs,
-  DMX-docsUIComponents,
-  DMX-docsFieldComponents,
-} from "@DMX-docs/react";
-import { ThemeProvider } from "@mui/material/styles";
-import { DMX-docsProps } from "./types";
-import { docs } from "./components/docs";
-import { FieldWrapper } from "./components/FieldWrapper";
-import { ErrorMessage } from "./components/ErrorMessage";
-import { SubmitButton } from "./components/SubmitButton";
-import { StringField } from "./components/StringField";
-import { NumberField } from "./components/NumberField";
-import { BooleanField } from "./components/BooleanField";
-import { DateField } from "./components/DateField";
-import { SelectField } from "./components/SelectField";
-import { ArrayField } from "./components/ArrayField";
-
-const MuiUIComponents: DMX-docsUIComponents = {
-  docs,
-  FieldWrapper,
-  ErrorMessage,
-  SubmitButton,
-};
-
-export const MuiDMX-docsFieldComponents: DMX-docsFieldComponents = {
-  string: StringField,
-  number: NumberField,
-  boolean: BooleanField,
-  date: DateField,
-  select: SelectField,
-  array: ArrayField,
-};
-
-export function DMX-docs<T extends Record<string, any>>({
-  theme,
-  ...props
-}: DMX-docsProps<T>) {
-  const ThemedForm = () => (
-    <BaseDMX-docs
-      {...props}
-      uiComponents={MuiUIComponents}
-      formComponents={MuiDMX-docsFieldComponents}
-    />
-  );
-
-  return theme ? (
-    <ThemeProvider theme={theme}>
-      <ThemedForm />
-    </ThemeProvider>
-  ) : (
-    <ThemedForm />
-  );
-}
+```bash tab="pnpm"
+pnpm create fumadocs-app
 ```
 
-## How They Interact
+```bash tab="yarn"
+yarn create fumadocs-app
+```
 
-1. A user defines their docs schema using a supported schema library (e.g., Zod).
-2. The schema is passed to the appropriate schema provider (e.g., @DMX-docs/zod).
-3. The `DMX-docs` component from a UI-specific library (e.g., @DMX-docs/mui) is used in the React application.
-4. This `DMX-docs` component wraps the core `DMX-docs` from @DMX-docs/react, providing UI-specific components.
-5. The core `DMX-docs` uses the schema provider to parse the schema, generate docs fields, and handle validation.
-6. UI-specific components render the docs fields and handle user input.
-7. On docs submission, the schema provider validates the data, and the result is passed to the onSubmit handler.
+```bash tab="bun"
+bun create fumadocs-app
+```
 
-This modular structure allows DMX-docs to be flexible and extensible. Users can choose their preferred schema library and UI framework, or even create custom implementations for unsupported libraries.
+It will ask you the built-in template to use:
+
+- **React.js framework**: Next.js, Waku, React Router, Tanstack Start.
+- **Content source**: Fumadocs MDX.
+
+A new fumadocs app should be initialized. Now you can start hacking!
+
+<Callout title="From Existing Codebase?">
+  You can follow the [Manual Installation](/docs/ui/manual-installation) guide
+  to get started.
+</Callout>
+
+### Enjoy!
+
+Create your first MDX file in the docs folder.
+
+```mdx title="content/docs/index.mdx"
+---
+title: Hello World
+---
+
+## Yo what's up
+```
+
+Run the app in development mode and see [http://localhost:3000/docs](http://localhost:3000/docs).
+
+<ModeTab command="fumadocs-mdx" />
+
+## FAQ
+
+Some common questions you may encounter.
+
+<Accordions>
+  <Accordion id="upgrade-fumadocs" title="Getting error with missing APIs or bugs?">
+    Make sure to upgrade Fumadocs when you've encountered any problems or trying out new features:
+
+    ```bash title="pnpm"
+    pnpm update -i -r --latest
+    ```
+
+  </Accordion>
+
+  <Accordion id="change-base-url" title="How to change the base route of docs?">
+    Routing is handled by your React framework, you need to change the routing structure first.
+
+    For example, in Next.js, rename the route (`/docs/*` -> `/info/*`):
+
+    <Files>
+      <Folder name="app/docs" defaultOpen className="opacity-50" disabled>
+        <File name="layout.tsx" />
+      </Folder>
+
+      <Folder name="app/info" defaultOpen>
+        <File name="layout.tsx" />
+      </Folder>
+    </Files>
+
+    Or rename from `/docs/*` to `/*` using a route group:
+
+    <Files>
+      <Folder name="app/(docs)" defaultOpen>
+        <File name="layout.tsx" />
+      </Folder>
+    </Files>
+
+    Finally, update the base URL of pages in `source.ts`:
+
+    ```ts title="lib/source.ts"
+    import { loader } from 'fumadocs-core/source';
+
+    export const source = loader({
+      baseUrl: '/info', // to the new value [!code highlight]
+    });
+    ```
+
+  </Accordion>
+
+  <Accordion id="multi-docs" title="How to implement multi-docs?">
+    We recommend to use [Sidebar Tabs](/docs/ui/navigation/sidebar#sidebar-tabs).
+  </Accordion>
+</Accordions>
+
+### For Vite
+
+<Accordions>
+  <Accordion id="vite-context-error" title="Getting error with React contexts?">
+    There's some weird pre-bundling problems with Vite: [#3910](https://github.com/vitejs/vite/issues/3910).
+    Make sure to exclude Fumadocs from pre-bundling and add it to `noExternal`:
+
+    ```ts title="vite.config.ts"
+    import { defineConfig } from 'vite';
+
+    // add other Fumadocs deps as needed
+    const FumadocsDeps = ['fumadocs-core', 'fumadocs-ui'];
+
+    export default defineConfig({
+      resolve: {
+        noExternal: FumadocsDeps,
+      },
+      optimizeDeps: {
+        exclude: FumadocsDeps,
+      },
+    });
+    ```
+
+  </Accordion>
+</Accordions>
+
+### For Next.js
+
+<Accordions>
+  <Accordion id="node-23" title="Getting error on production build?">
+    Node.js 23.1 might have problems with Next.js, see [#1021](https://github.com/fuma-nama/fumadocs/issues/1021). Make sure to change your Node.js version.
+  </Accordion>
+
+  <Accordion id="dynamic-route" title="It uses Dynamic Route, will it be poor in performance?">
+    Next.js turns dynamic route into static routes when `generateStaticParams` is configured.
+    Hence, it is as fast as static pages.
+
+    You can [enable Static Exports](/docs/ui/static-export) on Next.js to get a static build output.
+
+  </Accordion>
+
+  <Accordion id="custom-layout-docs-page" title="How to create a page in /docs without docs layout?">
+    Same as managing layouts in Next.js App Router, remove the original MDX file from content directory (`/content/docs`).
+    This ensures duplicated pages will not cause errors.
+
+    Now, You can add the page to another route group, which isn't a descendant of docs layout.
+
+    For example, to replace `/docs/test`:
+
+    <Files>
+      <File name="(home)/docs/test/page.tsx" />
+
+      <Folder name="docs">
+        <File name="layout.tsx" />
+
+        <File name="[[...slug]]/page.tsx" />
+      </Folder>
+    </Files>
+
+    For `/docs`, you need to change the catch-all route to be non-optional:
+
+    <Files>
+      <File name="(home)/docs/page.tsx" />
+
+      <Folder name="docs" defaultOpen>
+        <File name="layout.tsx" />
+
+        <File name="[...slug]/page.tsx" />
+      </Folder>
+    </Files>
+
+  </Accordion>
+</Accordions>
+
+## Learn More
+
+New to here? Don't worry, we are welcome for your questions.
+
+If you find anything confusing, please give your feedback on [Github Discussion](https://github.com/fuma-nama/fumadocs/discussions)!
+
+### Writing Content
+
+For authoring docs, make sure to read:
+
+<Cards>
+  <Card href="/docs/ui/markdown" title="Markdown">
+    Fumadocs has some additional features for authoring content.
+  </Card>
+
+{" "}
+
+<Card href="/docs/ui/navigation" title="Navigation">
+  Learn how to customise navigation links and sidebar items.
+</Card>
+
+{" "}
+
+<Card href="/docs/ui/page-conventions" title="Page Slugs & Page Tree">
+  Learn how to organise content.
+</Card>
+
+  <Card href="/docs/ui/components" title="Components" description="See all available components to enhance your docs" />
+</Cards>
+
+### Special Needs
+
+<Cards>
+  <Card href="/docs/ui/static-export" title="Configure Static Export" description="Learn how to enable static export on your docs" />
+
+{" "}
+
+<Card
+  href="/docs/ui/internationalization"
+  title="Internationalization"
+  description="Learn how to enable i18n"
+/>
+
+{" "}
+
+<Card
+  href="/docs/ui/theme"
+  title="Color Themes"
+  description="Add themes to Fumadocs UI"
+/>
+
+  <Card href="/docs/ui/customisation" title="Customise UI" description="A detailed guide on how to customise UI" />
+</Cards>
