@@ -11,13 +11,13 @@ import { cn } from "@/lib/utils";
 interface CarouselSpacingProps {
   slides: string[];
   video?: boolean;
-  slidesPerScreen: string;
+  slidesPerScreen?: string;
 }
 
 export function Slider({
   slides,
   video = false,
-  slidesPerScreen = "1",
+  slidesPerScreen,
 }: CarouselSpacingProps) {
   return (
     <div className="relative w-full px-4 pb-16">
@@ -26,7 +26,7 @@ export function Slider({
           {slides.map((src, index) => (
             <CarouselItem
               key={index}
-              className={`basis-1/${slidesPerScreen} pl-4`}
+              className={cn(`basis-1/${slidesPerScreen ?? "1"} pl-4`)}
             >
               <div className="relative flex aspect-auto items-center justify-center overflow-hidden border border-zinc-200 dark:border-zinc-800 rounded-xl">
                 {video ? (
