@@ -37,8 +37,8 @@
   --color-fd-primary: hsl(0, 0%, 15%);
 
   /* Animations */
-  --animate-fd-sidebar-in: fd-sidebar-in 100ms ease;
-  --animate-fd-sidebar-out: fd-sidebar-out 100ms ease;
+  --animate-fd-sidebar-in: fd-fade-in 300ms ease;
+  --animate-fd-sidebar-out: fd-fade-out 300ms ease;
 }
 
 .dark {

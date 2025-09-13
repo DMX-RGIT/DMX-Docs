@@ -185,13 +185,13 @@ export function SidebarContentMobile({
 
   return (
     <>
-      <Presence present={open}>
+      {/* <Presence present={open}>
         <div
           data-state={state}
           className="fixed z-40 inset-0 backdrop-blur-xs data-[state=open]:animate-fd-fade-in data-[state=closed]:animate-fd-fade-out"
           onClick={() => setOpen(false)}
         />
-      </Presence>
+      </Presence> */}
       <Presence present={open}>
         {({ present }) => (
           <aside
@@ -199,7 +199,7 @@ export function SidebarContentMobile({
             {...props}
             data-state={state}
             className={cn(
-              "fixed text-[15px] flex flex-col shadow-lg border-s end-0 inset-y-0 w-full z-40 bg-fd-background data-[state=open]:animate-fd-sidebar-in data-[state=closed]:animate-fd-sidebar-out",
+              "fixed text-[15px] flex flex-col shadow-lg border-s end-0 mt-(--fd-nav-height) inset-y-0 w-full z-40 bg-fd-background data-[state=open]:animate-fd-sidebar-in data-[state=closed]:animate-fd-sidebar-out",
               !present && "invisible",
               className
             )}
@@ -227,7 +227,7 @@ export function SidebarFooter(props: ComponentProps<"div">) {
   return (
     <div
       {...props}
-      className={cn("flex flex-col border-t p-4 pt-2", props.className)}
+      className={cn("flex flex-col border-t p-4 pt-3", props.className)}
     >
       {props.children}
     </div>

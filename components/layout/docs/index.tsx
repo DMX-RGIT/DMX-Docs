@@ -161,34 +161,6 @@ export function DocsLayout({
       <SidebarContentMobile {...rest}>
         <SidebarHeader>
           <div className="flex text-fd-muted-foreground items-center gap-1.5">
-            <div className="flex flex-1">
-              {iconLinks.map((item, i) => (
-                <BaseLinkItem
-                  key={i}
-                  item={item}
-                  className={cn(
-                    buttonVariants({
-                      size: "icon-sm",
-                      color: "ghost",
-                      className: "p-2",
-                    })
-                  )}
-                  aria-label={item.label}
-                >
-                  {item.icon}
-                </BaseLinkItem>
-              ))}
-            </div>
-            {i18n ? (
-              <LanguageToggle>
-                <Languages className="size-4.5" />
-                <LanguageToggleText />
-              </LanguageToggle>
-            ) : null}
-            {themeSwitch.enabled !== false &&
-              (themeSwitch.component ?? (
-                <ThemeToggle className="p-0" mode={themeSwitch.mode} />
-              ))}
             <SidebarTrigger
               className={cn(
                 buttonVariants({
@@ -205,7 +177,37 @@ export function DocsLayout({
           {banner}
         </SidebarHeader>
         {viewport}
-        <SidebarFooter className="empty:hidden">{footer}</SidebarFooter>
+        <SidebarFooter className="empty:hidden flex flex-row -mb-1">
+          <div className="flex flex-1">
+            {iconLinks.map((item, i) => (
+              <BaseLinkItem
+                key={i}
+                item={item}
+                className={cn(
+                  buttonVariants({
+                    size: "icon-sm",
+                    color: "ghost",
+                    className: "p-2",
+                  })
+                )}
+                aria-label={item.label}
+              >
+                {item.icon}
+              </BaseLinkItem>
+            ))}
+          </div>
+          {i18n ? (
+            <LanguageToggle>
+              <Languages className="size-4.5" />
+              <LanguageToggleText />
+            </LanguageToggle>
+          ) : null}
+          {themeSwitch.enabled !== false &&
+            (themeSwitch.component ?? (
+              <ThemeToggle className="p-0" mode={themeSwitch.mode} />
+            ))}
+          {footer}
+        </SidebarFooter>
       </SidebarContentMobile>
     );
 
@@ -239,7 +241,6 @@ export function DocsLayout({
               <LargeSearchToggle hideIfDisabled />
             ))}
           {tabs.length > 0 && <RootToggle options={tabs} />}
-
           {banner}
         </SidebarHeader>
         {viewport}
