@@ -6,7 +6,7 @@ import {
   type ReactNode,
   useMemo,
 } from "react";
-import { Languages, Sidebar as SidebarIcon } from "lucide-react";
+import { Languages, SidebarIcon } from "lucide-react";
 import { buttonVariants } from "fumadocs-ui/components/ui/button";
 import {
   type Option,
@@ -35,6 +35,7 @@ import {
   type GetSidebarTabsOptions,
 } from "fumadocs-ui/utils/get-sidebar-tabs";
 import {
+  MenuIcon,
   Sidebar,
   SidebarCollapseTrigger,
   type SidebarComponents,
@@ -160,7 +161,7 @@ export function DocsLayout({
     const mobile = (
       <SidebarContentMobile {...rest}>
         <SidebarHeader>
-          <div className="flex text-fd-muted-foreground items-center gap-1.5">
+          {/* <div className="flex text-fd-muted-foreground items-center gap-1.5">
             <SidebarTrigger
               className={cn(
                 buttonVariants({
@@ -172,7 +173,7 @@ export function DocsLayout({
             >
               <SidebarIcon />
             </SidebarTrigger>
-          </div>
+          </div> */}
           {tabs.length > 0 && <RootToggle options={tabs} />}
           {banner}
         </SidebarHeader>
@@ -315,7 +316,7 @@ export function DocsLayout({
                     })
                   )}
                 >
-                  <SidebarIcon />
+                  <MenuIcon />
                 </SidebarTrigger>
               )}
             </Navbar>

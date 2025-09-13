@@ -11,8 +11,12 @@ export const baseOptions: BaseLayoutProps = {
   nav: {
     title: (
       <div className="flex items-center gap-2">
-        <ChevronsDown className="bg-gradient-to-tr border-secondary from-primary via-primary/70 to-primary rounded-lg w-9 h-9 mr-2 border text-white" />
-        DMX
+        <img
+          src="/dmx-logo.png"
+          alt="dmx logo"
+          width={60}
+          fetchPriority="high"
+        />
       </div>
     ),
     transparentMode: "top",

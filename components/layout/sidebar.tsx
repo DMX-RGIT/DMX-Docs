@@ -1,5 +1,5 @@
 "use client";
-import { ChevronDown, ExternalLink } from "lucide-react";
+import { ChevronDown, ExternalLink, Menu, X } from "lucide-react";
 import { usePathname } from "fumadocs-core/framework";
 import {
   type ComponentProps,
@@ -199,8 +199,9 @@ export function SidebarContentMobile({
             {...props}
             data-state={state}
             className={cn(
-              "fixed text-[15px] flex flex-col shadow-lg border-s end-0 mt-(--fd-nav-height) inset-y-0 w-full z-40 bg-fd-background data-[state=open]:animate-fd-sidebar-in data-[state=closed]:animate-fd-sidebar-out",
+              "fixed md:text-[15px] text-xl flex flex-col shadow-lg border-s end-0 mt-(--fd-nav-height) inset-y-0 w-full z-40 bg-fd-background data-[state=open]:animate-fd-sidebar-in data-[state=closed]:animate-fd-sidebar-out",
               !present && "invisible",
+              "[&_svg]:size-6",
               className
             )}
           >
@@ -409,16 +410,26 @@ export function SidebarTrigger({
   children,
   ...props
 }: ComponentProps<"button">) {
-  const { setOpen } = useSidebar();
+  const { setOpen, open } = useSidebar();
 
   return (
     <button
       {...props}
       aria-label="Open Sidebar"
+      data-open={open}
       onClick={() => setOpen((prev) => !prev)}
     >
       {children}
     </button>
+  );
+}
+
+export function MenuIcon() {
+  return (
+    <>
+      <Menu className="in-data-[open=true]:hidden" />
+      <X className="hidden in-data-[open=true]:block" />
+    </>
   );
 }
 
