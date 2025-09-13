@@ -35,6 +35,10 @@
   --color-fd-card: hsl(240, 14%, 98%);
   --color-fd-secondary: hsl(240, 20%, 95%);
   --color-fd-primary: hsl(0, 0%, 15%);
+
+  /* Animations */
+  --animate-fd-sidebar-in: fd-sidebar-in 100ms ease;
+  --animate-fd-sidebar-out: fd-sidebar-out 100ms ease;
 }
 
 .dark {
